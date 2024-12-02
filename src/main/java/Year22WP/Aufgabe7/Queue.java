@@ -3,8 +3,10 @@ package Year22WP.Aufgabe7;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class Queue<E> implements Iterable{
+public class Queue<E> implements Iterable<E>{ // Iterable muss auch parametrisiert sein
+  // Aufgabe A:
     private SSL<E> head;
     private SSL<E> tail;
 
@@ -44,6 +46,7 @@ public class Queue<E> implements Iterable{
         return tmp;
     }
 
+    // Aufgabe B:
     @Override
     public @NotNull Iterator<E> iterator() { // muss anscheinend so sein
         return new Qiter();
@@ -59,11 +62,56 @@ public class Queue<E> implements Iterable{
 
         @Override
         public E next(){
+            if (iter == null) throw new NoSuchElementException();
             E tmp = iter.element;
             iter = iter.next;
             return tmp;
         }
 
+    }
+
+    // Aufgabe C:
+     /*
+        Z ist als neuer Parameter
+
+         Beim Vergleich q wird gegen min verglichen, wenn min < q wird das Ergebnis > 0 sein.
+    */
+    public  <Z extends Comparable<Z>> Z min(Queue<Z> queue){
+        if(queue == null || queue.isEmpty()) throw new IllegalArgumentException(); // muss eine Methode sein
+
+        Z min = queue.head.element;
+
+        for(Z q : queue){
+            if (q.compareTo(min) < 0) {
+                min = q;
+            }
+        }
+        
+        return min;
+    }
+
+    // Aufgabe D:
+    public Queue<E> filter (Predicate<E> filter){
+        Queue<E> ret = new Queue<>();
+        for(E r : this){
+            if(filter.test(r)) ret.enqueue(r);
+        }
+        return ret;
+    }
+
+    // Aufgabe E:
+
+    public static <O, U, T> Queue<O> combine(Queue<T> qf, Queue<U> qs, BiFunction<T, U, O> combine){
+        Queue<O> combined = new Queue<>();
+
+        Iterator<T> qfirst = qf.iterator();
+        Iterator<U> qsecond = qs.iterator();
+
+        while(qfirst.hasNext() && qsecond.hasNext()){
+            combined.enqueue(combine.apply(qfirst.next(), qsecond.next()));
+        }
+
+        return combined;
     }
 
 }
