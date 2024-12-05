@@ -95,4 +95,19 @@ public class Queue<E> implements Iterable<E>{
         return tmp;
     }
 
+    /// Aufgabe E:
+
+    static <T, U, O> Queue<O> combines (Queue<T> q1, Queue<U> q2, BiFunction<T, U, O> app){
+        if(q1.isEmpty() || q2.isEmpty()) return new Queue<>();
+        Queue<O> qu = new Queue<>();
+
+        Iterator<T> qIter1 = q1.iterator();
+        Iterator<U> qIter2 = q2.iterator();
+
+        while (qIter1.hasNext() && qIter2.hasNext()) {
+            qu.enqueue(app.apply(qIter1.next(), qIter2.next()));             
+        }
+
+        return qu;
+    }
 }
