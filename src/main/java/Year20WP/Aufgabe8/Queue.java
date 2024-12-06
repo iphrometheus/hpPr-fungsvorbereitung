@@ -1,6 +1,5 @@
-package Year20WP;
+package Year20WP.Aufgabe8;
 
-import java.security.spec.ECParameterSpec;
 import java.util.Iterator;
 
 public class Queue<E> implements Iterable<E> {

@@ -1,4 +1,4 @@
-package Year20WP;
+package Year20WP.Aufgabe8;
 
 @FunctionalInterface
 public interface Function <I,O>{

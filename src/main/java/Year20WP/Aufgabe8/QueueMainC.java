@@ -1,4 +1,4 @@
-package Year20WP;
+package Year20WP.Aufgabe8;
 
 public class QueueMainC {
     public static void main(String[] args) {
