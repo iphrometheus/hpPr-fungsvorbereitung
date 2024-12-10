@@ -26,3 +26,55 @@ public class Test(){
 | private         |       -       |
 | protected       |       #       |
 
+### Interfaces mit Parameterisierbaren Variablen
+
+Wenn eine Klasse aus einem Interface implementiert wird welches Parametriesierbar ist und die Klasse parametriesiert implementiert wird muss beim interface ```<<bind>> <Parameter-> Typ> ``` dabei sein:
+
+```java
+// siehe 2020 Wiederholungsprüfung
+public Interface Orderable<O>{
+    void placeOrder(O);
+    O handleOrder();
+}
+
+public class Item implements Orderable<Integer>{
+    @Override
+    public void placeOrder(Integer order){
+        //abgekürzt
+        return;
+    }
+
+    @Override
+    public Integer handleOrder(){
+        // abgekürzt
+        return null;
+    }
+}
+```
+
+
+<p align=center> || <br>\/</p>
+
+
+```uml
+                     _______________________________
+                    | <<interface>> Orderable [O]   |
+                    |_______________________________|
+                    | + placeOrder(O): void         |
+                    | + handleOrder(): O            |
+                    |_______________________________|
+                                    /\
+                                   /  \
+                                  /    \
+                                    |
+
+                                    | <<bind>> <O -> Integer>
+            
+                                    |
+                     _______________________________
+                    |             Item              |
+                    |_______________________________|
+                    |+ placeOrder(Integer): void    |
+                    |+ handleOrder(): Integer       |
+                    |_______________________________|
+```
