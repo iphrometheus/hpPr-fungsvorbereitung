@@ -3,28 +3,15 @@ package Year20WP.Aufgabe8;
 import java.util.Iterator;
 
 public class Queue<E> implements Iterable<E> {
-
-    /// Aufgabe A
     private SSL<E> head;
     private SSL<E> tail;
 
     private static class SSL<E> {
-        E element;
-        SSL<E> next;
-
-        SSL(E element, SSL<E> next){
-            this.element = element;
+        public E element;
+        public SSL<E> next;
+        SSL(E ele, SSL<E> next){
+            this.element = ele;
             this.next = next;
-        }
-    }
-
-    public void enqueue(E ele){
-        if(ele == null) return;
-        if(head == null){
-            head = tail = new SSL<>(ele, null);
-        }else{
-            tail.next = new SSL<>(ele, null);
-            tail = tail.next;
         }
     }
 
@@ -32,8 +19,14 @@ public class Queue<E> implements Iterable<E> {
         return head == null;
     }
 
-    public E getFirst(){
-        return head.element;
+    public void enqueue(E ele){
+        if(ele == null) return;
+        if(isEmpty()){
+            head = tail = new SSL<>(ele, null);
+        } else {
+            tail.next = new SSL<>(ele, null);
+            tail = tail.next;
+        }
     }
 
     public E dequeue(){
@@ -42,7 +35,9 @@ public class Queue<E> implements Iterable<E> {
         return tmp;
     }
 
-    /// Aufgabe B
+    public E getFirst(){
+        return head.element;
+    }
 
     public Iterator<E> iterator(){
         return new QIter();
@@ -50,7 +45,7 @@ public class Queue<E> implements Iterable<E> {
 
     private class QIter implements Iterator<E>{
         private SSL<E> iter = head;
-        
+
         @Override
         public boolean hasNext(){
             return iter != null;
@@ -62,42 +57,32 @@ public class Queue<E> implements Iterable<E> {
             iter = iter.next;
             return tmp;
         }
-
     }
 
-    /// Aufgabe C
-
-    static <E extends Comparable<E>> E max(Queue<E> queue){
-        if(queue == null || queue.isEmpty()) throw new IllegalArgumentException();
-
-        E max = queue.head.element;
-
-        for(E i: queue){
-            if(i.compareTo(max) > 0){
-                max = i;
+    public static <Z extends Comparable<Z>> Z max(Queue<Z> q){
+        if(q == null || q.isEmpty()) throw new IllegalArgumentException();
+        Z max = q.getFirst();
+        for(Z z: q){
+            if(z.compareTo(max) > 0){
+                max = z;
             }
         }
         return max;
     }
 
-    /// Aufgabe D
-    
-    Queue<E> filter(Predicate<E> f){
+    public Queue<E> filter(Predicate<E> f){
         Queue<E> ret = new Queue<>();
-        for(E i : this){
-            if(f.test(i)) ret.enqueue(i);
+        for(E z : this){
+            if(f.test(z)) ret.enqueue(z);
         }
         return ret;
-    }
+    } 
 
-    /// Aufgabe E
-    
-    <O> Queue<O> map(Function<E,O> f){
-        Queue<O> q = new Queue<>();
-        for(E z:  this){
-            O tmp = f.apply(z);
-            q.enqueue(tmp);
+    public <Z> Queue<Z> map(Function<E,Z> f){
+        Queue<Z> ret = new Queue<>();
+        for(E z : this){
+            ret.enqueue(f.apply(z));
         }
-        return q;
+        return ret;
     }
 }

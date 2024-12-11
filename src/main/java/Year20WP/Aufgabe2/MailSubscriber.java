@@ -2,7 +2,6 @@ package Year20WP.Aufgabe2;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class MailSubscriber implements Subscribable<Mail>, Comparable<MailSubscriber> {
@@ -73,8 +72,8 @@ public class MailSubscriber implements Subscribable<Mail>, Comparable<MailSubscr
 
     @Override
     public void send(Mail mail) {
-        //todo: send email with "mail.subject", "mail.text" and "mail.sender"
-        //      to "eMail". Not yet implemented
+        //send email with "mail.subject", "mail.text" and "mail.sender"
+        //to "eMail". Not yet implemented
     }
 
     @Override
