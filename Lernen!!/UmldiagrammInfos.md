@@ -1,4 +1,4 @@
-# UML Diagramme
+# UML-Diagramme
 
 ```java
 public class Test(){
@@ -26,9 +26,9 @@ public class Test(){
 | private         |       -       |
 | protected       |       #       |
 
-### Interfaces mit Parameterisierbaren Variablen
+### Interfaces mit parameterisierbaren Variablen
 
-Wenn eine Klasse aus einem Interface implementiert wird welches Parametriesierbar ist und die Klasse parametriesiert implementiert wird muss beim interface ```<<bind>> <Parameter-> Typ> ``` dabei sein:
+Wenn eine Klasse aus einem Interface implementiert wird, welches Parametriesierbar ist und die Klasse parametriesiert implementiert wird muss beim interface ```<<bind>> <Parameter-> Typ> ``` dabei sein:
 
 ```java
 // siehe 2020 Wiederholungsprüfung
@@ -68,7 +68,7 @@ public class Item implements Orderable<Integer>{
                                   /    \
                                     |
 
-                                    | <<bind>> <O -> Integer>
+                                    | <<bind>> <<O -> Integer>>
             
                                     |
                      _______________________________
