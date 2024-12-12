@@ -21,7 +21,7 @@ public class EinsatzPlanung {
             return false;
         }
         Integer got = einsatz.get(rentier);
-        if(got == null || got - minuten) return false;
+        if(got == null || (got - minuten) < 0) return false;
         einsatz.put(rentier, got - minuten);
         return true;
     }
